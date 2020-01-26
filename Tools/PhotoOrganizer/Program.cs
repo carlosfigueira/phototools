@@ -137,10 +137,12 @@ namespace PhotoOrganizer
                     if (prop.Id == PropertyTagDateTimeOriginal)
                     {
                         Debug.Assert(prop.Type == PropertyTagTypeASCII);
-                        Debug.Assert(prop.Value.Length == 20);
+                        Debug.Assert(prop.Value.Length == 20 || prop.Value.Length == 24);
                         dateTime = Encoding.ASCII.GetString(prop.Value, 0, 19);
+                        break;
                     }
                 }
+
                 if (dateTime == null)
                 {
                     foreach (PropertyItem prop in properties)
@@ -153,6 +155,7 @@ namespace PhotoOrganizer
                         }
                     }
                 }
+
                 if (dateTime == null)
                 {
                     foreach (PropertyItem prop in properties)
@@ -166,6 +169,7 @@ namespace PhotoOrganizer
                     }
                 }
             }
+
             if (dateTime == null)
             {
                 Console.WriteLine("Cannot find date time for file {0}", originalFileName);
